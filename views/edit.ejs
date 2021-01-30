@@ -1,0 +1,21 @@
+<%- include('layouts/header'); %>
+<header>
+  <a href="/" class="header-logo">LIST</a>
+</header>
+<div class="container">
+  <div class="container-header">
+    <h1>Edit Item</h1>
+  </div>
+  <div class="item-form-wrapper">
+    <p class="form-label">Item</p>
+    <form action="/<%= item.id %>?_method=PUT&_csrf=<%= csrfToken %>" method="post" enctype="multipart/form-data">
+      <label for="itemNama">Nama Barang</label>
+      <input type="text" name="itemName" value="<%= item.nama %>" id="itemNama">
+      <label for="itemPicture">Gambar Barang</label>
+      <input type="file" name="itemPicture" value="<%= item.picture%>" accept="image/png, image/jpg, image/jpeg" id="itemPicture">
+      <input type="submit" value="Perbarui">
+    </form>
+  </div>
+  <a href="/index" class="cancel-button">Kembali</a>
+</div>
+<%- include('layouts/footer'); %>
