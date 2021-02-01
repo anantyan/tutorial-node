@@ -1,6 +1,6 @@
 const mysql = require('mysql');
 
-const conn = (cb) => {
+const dbConfig = (cb) => {
   mysql.createPool({
     host: 'localhost',
     user: 'root',
@@ -9,4 +9,4 @@ const conn = (cb) => {
   }).getConnection(cb);
 }
 
-module.exports.conn = conn;
+module.exports = dbConfig;

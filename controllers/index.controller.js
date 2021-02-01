@@ -1,11 +1,15 @@
 const fs = require('fs'); // access file system
 const path = require('path');
-const {indexModel} = require('../models/index.model.js');
+const indexModel = require('../models/index.model');
 
 class Index {
 
   static home(req, res) {
-    res.render('top.ejs');
+    if(req.session.logged) {
+      res.send({hello: req.session});
+    } else {
+      res.send({hello: 'session ID not found!'});
+    }
   }
   static index(req, res) {
     indexModel.get((err, results) => {
@@ -18,13 +22,13 @@ class Index {
   } // read
 
   static detail(req, res) {
-    indexModel.getId([req.params.id], (err, results) => {
-      if(results) {
-        res.render('detail.ejs', {item: results[0]});
-      } else {
-        console.log(err);
-      }
-    });
+    req.session.logged=true
+    req.session.userID = {
+      uniqID: req.sessionID,
+      name: "Arya Rezza Anantya",
+      address: "Banjarnegara",
+    }
+    res.send({hello: req.session}); // sebagai contoh session aja
   } // detail
 
   static new(req, res) {
@@ -78,4 +82,4 @@ class Index {
   } // delete
 }
 
-module.exports.indexController = Index;
+module.exports = Index;

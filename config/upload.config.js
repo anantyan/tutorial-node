@@ -31,16 +31,16 @@ const itemPicture = multer({
   fileFilter: filter
 }).single('itemPicture');
 
-class upload {
+class uploadConfig {
   
   static itemPicture(req, res, next) {
     itemPicture(req, res, (err) => {
       if(err instanceof multer.MulterError) {
-        res.status(200);
-        res.send({status_code: 200, message: err.message});
+        res.status(200)
+        res.render('error', {message: err.message, error: {status: 200}});
       } else if(err) {
-        res.status(200);
-        res.send({status_code: 200, message: err.message});
+        res.status(200)
+        res.render('error', {message: err.message, error: {status: 200}});
       } else if(req.file != undefined) {
         next();
       }
@@ -48,4 +48,4 @@ class upload {
   }
 }
 
-module.exports.upload = upload;
+module.exports = uploadConfig;
