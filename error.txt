@@ -1,0 +1,9 @@
+Error: Redis connection to 127.0.0:6379 failed - getaddrinfo ENOTFOUND 127.0.0
+Error: Redis connection to 127.0.0:6379 failed - getaddrinfo ENOTFOUND 127.0.0
+Error: Redis connection to 127.0.0:6379 failed - getaddrinfo ENOTFOUND 127.0.0
+Error: Redis connection to 127.0.0:6379 failed - getaddrinfo ENOTFOUND 127.0.0
+Error: Redis connection to 127.0.0:6379 failed - getaddrinfo ENOTFOUND 127.0.0
+Error: Redis connection to 127.0.0:6379 failed - getaddrinfo ENOTFOUND 127.0.0
+Error: Redis connection to 127.0.0:6379 failed - getaddrinfo ENOTFOUND 127.0.0
+Error: Redis connection to 127.0.0:6379 failed - getaddrinfo ENOTFOUND 127.0.0
+Error: Redis connection to 127.0.0:6379 failed - getaddrinfo ENOTFOUND 127.0.0

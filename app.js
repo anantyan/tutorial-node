@@ -13,6 +13,8 @@ const sessionConfig = require('./config/session.config');
 const app = express();
 const ninetyDaysInMilliseconds = 90*24*60*60;
 
+app.set('trust proxy', 1);
+
 /* VIEW ENGINE SETUP */
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');

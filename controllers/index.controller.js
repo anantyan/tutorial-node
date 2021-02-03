@@ -6,9 +6,9 @@ class Index {
 
   static home(req, res) {
     if(req.session.logged) {
-      res.send({hello: req.session});
+      res.json({hello: req.session});
     } else {
-      res.send({hello: 'session ID not found!'});
+      res.json({hello: 'session ID not found!'});
     }
   }
   static index(req, res) {
@@ -21,14 +21,14 @@ class Index {
     });
   } // read
 
-  static detail(req, res) {
+  static async detail(req, res) {
     req.session.logged=true
     req.session.userID = {
       uniqID: req.sessionID,
       name: "Arya Rezza Anantya",
       address: "Banjarnegara",
     }
-    res.send({hello: req.session}); // sebagai contoh session aja
+    res.json({hello: req.session}); // sebagai contoh session aja
   } // detail
 
   static new(req, res) {
