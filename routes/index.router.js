@@ -3,14 +3,15 @@ const router = express.Router();
 
 const indexController = require('../controllers/index.controller');
 const uploadConfig = require('../config/upload.config');
+const rateLimiter = require('../config/rateLimit.config');
 
 router.get('/', indexController.home);
 router.get('/index', indexController.index);
 router.get('/detail/:id', indexController.detail);
 router.get('/new', indexController.new);
-router.post('/create', indexController.create);
+router.post('/create', rateLimiter, indexController.create);
 router.get('/edit/:id', indexController.edit);
-router.put('/:id', uploadConfig.itemPicture, indexController.update);
+router.put('/:id', rateLimiter, uploadConfig.itemPicture, indexController.update);
 router.delete('/:id', indexController.delete);
 
 module.exports = router;

@@ -1,3 +1,0 @@
-isConnected!
-Thu Feb 04 2021 01:23:52 GMT+0700 (Western Indonesia Time) isConnected!
-Thu Feb 04 2021 01:24:19 GMT+0700 (Western Indonesia Time) Redis isConnected!

@@ -6,7 +6,7 @@ class Index {
 
   static home(req, res) {
     if(req.session.logged) {
-      res.json({hello: req.session});
+      res.render('top');
     } else {
       res.json({hello: 'session ID not found!'});
     }
@@ -14,7 +14,7 @@ class Index {
   static index(req, res) {
     indexModel.get((err, results) => {
       if(results) {
-        res.render('index.ejs', {csrfToken: req.csrfToken(), items: results});
+        res.render('index', {csrfToken: req.csrfToken(), items: results});
       } else {
         console.log(err);
       }
@@ -32,7 +32,7 @@ class Index {
   } // detail
 
   static new(req, res) {
-    res.render('new.ejs', {csrfToken: req.csrfToken()});
+    res.render('new', {csrfToken: req.csrfToken()});
   }
   static create(req, res) {
     indexModel.post([req.body.itemName], (err, results) => {
@@ -43,7 +43,7 @@ class Index {
   static edit(req, res) {
     indexModel.getId([req.params.id], (err, results) => {
       if(results) {
-        res.render('edit.ejs', {csrfToken: req.csrfToken(), item: results[0]});
+        res.render('edit', {csrfToken: req.csrfToken(), item: results[0]});
       } else {
         console.log(err);
       }

@@ -6,6 +6,7 @@ const logger = require('morgan');
 const csrf = require('csurf');
 const helmet = require('helmet');
 const methodOverride = require('method-override');
+const httpsRedirect = require('express-naked-redirect');
 
 const indexRouter = require('./routes/index.router');
 const sessionConfig = require('./config/session.config');
@@ -14,6 +15,10 @@ const app = express();
 const ninetyDaysInMilliseconds = 90*24*60*60;
 
 app.set('trust proxy', 1);
+// app.use(httpsRedirect({
+//   subDomain: 'www',
+//   protocol: 'https'
+// }));
 
 /* VIEW ENGINE SETUP */
 app.set('views', path.join(__dirname, 'views'));

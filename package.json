@@ -12,6 +12,8 @@
     "debug": "^2.6.9",
     "ejs": "^2.7.4",
     "express": "^4.17.1",
+    "express-naked-redirect": "^0.1.9",
+    "express-rate-limit": "^5.2.3",
     "express-session": "^1.17.1",
     "helmet": "^4.4.1",
     "http-errors": "^1.8.0",
@@ -20,6 +22,7 @@
     "multer": "^1.4.2",
     "mysql": "^2.18.1",
     "nodemon": "^2.0.7",
+    "rate-limit-redis": "^2.0.0",
     "redis": "^3.0.2"
   }
 }
