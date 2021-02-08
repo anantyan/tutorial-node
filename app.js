@@ -6,6 +6,7 @@ const csrf = require('csurf');
 const helmet = require('helmet');
 const path = require('path');
 const app = express();
+const sessionConfig = require('./configs/session.config.js');
 const {indexRouter} = require('./routes/index.router.js');
 
 const ninetyDaysInMilliseconds = 90*24*60*60;
@@ -39,6 +40,9 @@ app.use(bodyParser.urlencoded({extended: false})); // body parsing data
 
 /* COOKIE PARSER */
 app.use(cookieParser()); // cookie in enabled
+
+/* SESSION EXPRESS */
+app.use(sessionConfig.data);
 
 /* CSURF */
 app.use(csrf({cookie: true}));

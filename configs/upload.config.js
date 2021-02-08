@@ -31,7 +31,7 @@ const itemPicture = multer({
   fileFilter: filter
 }).single('itemPicture');
 
-class upload {
+class uploadConfig {
   
   static itemPicture(req, res, next) {
     itemPicture(req, res, (err) => {
@@ -48,4 +48,4 @@ class upload {
   }
 }
 
-module.exports.upload = upload;
+module.exports = uploadConfig;
