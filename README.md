@@ -5,7 +5,6 @@
 ### Config
 * cookie-parser
 * csurf
-* debug
 * ejs
 * express
 * express-session
