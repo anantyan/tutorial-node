@@ -104,7 +104,5 @@ dist
 .tern-port
 
 # custom gitignore
-package.json
-package-lock.json
 RedisConnect.txt
 RedisError.txt
