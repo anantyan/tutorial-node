@@ -1,7 +1,7 @@
 const rateLimit = require('express-rate-limit');
 const RedisStore = require('rate-limit-redis');
 
-const {redisClient} = require('./session.config');
+const redisClient = require('./redis.config');
 
 const errorHandler = (req, res) => {
   res.status(429);

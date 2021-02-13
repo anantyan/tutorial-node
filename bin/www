@@ -5,14 +5,14 @@
  */
 
 var app = require('../app');
-var debug = require('debug')('tutorial-node-2:server');
+var debug = require('debug')('tutorial-node:server');
 var http = require('http');
 
 /**
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '8430');
+var port = normalizePort(process.env.PORT || '8080');
 app.set('port', port);
 
 /**

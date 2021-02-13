@@ -12,16 +12,17 @@ class Index {
     }
   }
   static index(req, res) {
-    indexModel.get((err, results) => {
-      if(results) {
-        res.render('index', {csrfToken: req.csrfToken(), items: results});
+    indexModel.get((err, connection, result) => {
+      connection.release();
+      if(result) {
+        res.render('index', {csrfToken: req.csrfToken(), items: result});
       } else {
         console.log(err);
       }
     });
   } // read
 
-  static async detail(req, res) {
+  static detail(req, res) {
     req.session.logged=true
     req.session.userID = {
       uniqID: req.sessionID,
@@ -41,21 +42,24 @@ class Index {
   } // create
 
   static edit(req, res) {
-    indexModel.getId([req.params.id], (err, results) => {
-      if(results) {
-        res.render('edit', {csrfToken: req.csrfToken(), item: results[0]});
+    indexModel.getId([req.params.id], (err, connection ,result) => {
+      connection.release();
+      if(result) {
+        res.render('edit', {csrfToken: req.csrfToken(), item: result[0]});
       } else {
         console.log(err);
       }
     });
   }
   static update(req, res) {
-    indexModel.getId([req.params.id], (err, results) => {
-      if(results) {
-        fs.unlink(path.join(__dirname, `../public/upload/${results[0].picture}`), (err) => {
-          // if(err) console.log(err);
+    indexModel.getId([req.params.id], (err, connection, result) => {
+      connection.release();
+      if(result) {
+        fs.unlink(path.join(__dirname, `../public/upload/${result[0].picture}`), (err) => {
+          // if(err) throw err;
           indexModel.put([req.body.itemName, req.file.filename, req.file.path, req.params.id],
-            (err, results) => {
+            (err, connection, result) => {
+              connection.release();
               res.redirect('/index');
             }
           );
@@ -67,11 +71,13 @@ class Index {
   } // update
 
   static delete(req, res) {
-    indexModel.getId([req.params.id], (err, results) => {
-      if(results) {
-        fs.unlink(path.join(__dirname, `../public/upload/${results[0].picture}`), (err) => {
-          // if(err) console.log(err);
-          indexModel.delete([req.params.id], (err, results) => {
+    indexModel.getId([req.params.id], (err, connection, result) => {
+      connection.release();
+      if(result) {
+        fs.unlink(path.join(__dirname, `../public/upload/${result[0].picture}`), (err) => {
+          // if(err) throw err;
+          indexModel.delete([req.params.id], (err, connection, results) => {
+            connection.release();
             res.redirect('/index');
           });
         });

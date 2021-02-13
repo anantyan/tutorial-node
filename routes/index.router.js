@@ -12,6 +12,6 @@ router.get('/new', indexController.new);
 router.post('/create', rateLimiter, indexController.create);
 router.get('/edit/:id', indexController.edit);
 router.put('/:id', rateLimiter, uploadConfig.itemPicture, indexController.update);
-router.delete('/:id', indexController.delete);
+router.delete('/:id', rateLimiter,indexController.delete);
 
 module.exports = router;
