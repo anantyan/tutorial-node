@@ -1,5 +1,5 @@
 {
-  "name": "tutorial-node-2",
+  "name": "tutorial-node",
   "version": "1.1.1",
   "private": true,
   "scripts": {
@@ -11,10 +11,12 @@
     "csurf": "^1.11.0",
     "debug": "^2.6.9",
     "ejs": "^2.7.4",
+    "entities": "^2.2.0",
     "express": "^4.17.1",
     "express-naked-redirect": "^0.1.9",
     "express-rate-limit": "^5.2.3",
     "express-session": "^1.17.1",
+    "express-validator": "^6.9.2",
     "helmet": "^4.4.1",
     "http-errors": "^1.8.0",
     "method-override": "^3.0.0",

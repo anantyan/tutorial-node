@@ -3,6 +3,8 @@
 * Configurasi nodejs &amp; expressjs minimal dengan security<br/>
 * Configurasi 1.1.1 version dengan NodeJS versi 14 LTS
 ### Config
+#### Third version
+* express-validator
 #### Second Version
 * connect-redis
 * cookie-parser

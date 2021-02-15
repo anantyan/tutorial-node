@@ -103,6 +103,6 @@ dist
 # TernJS port file
 .tern-port
 
-# Tambahan
+# custom gitignore
 RedisConnect.txt
 RedisError.txt

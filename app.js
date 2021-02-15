@@ -15,10 +15,6 @@ const app = express();
 const ninetyDaysInMilliseconds = 90*24*60*60;
 
 app.set('trust proxy', 1);
-// app.use(httpsRedirect({
-//   subDomain: 'www',
-//   protocol: 'https'
-// }));
 
 /* VIEW ENGINE SETUP */
 app.set('views', path.join(__dirname, 'views'));
@@ -29,6 +25,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use('/static', express.static(path.join(__dirname, 'public')));
+// app.use(httpsRedirect({
+//   subDomain: 'www',
+//   protocol: 'https'
+// }));
 
 /* HELMETJS */
 app.use(helmet.hidePoweredBy()); // for hide powered by language
@@ -56,12 +56,12 @@ app.use(methodOverride('_method')); // method override for API in Form HTML
 app.use(sessionConfig.data);
 
 /* CSURF */
-app.use(csrf({cookie: true}));
-app.use((err, req, res, next) => {
-  if (err.code !== 'EBADCSRFTOKEN') return next(err)
-  res.status(403)
-  res.render('error', {message: 'Opps Invalid Token CSRF!', error: {status: 403}});
-}); // error handle csrf
+// app.use(csrf({cookie: true}));
+// app.use((err, req, res, next) => {
+//   if (err.code !== 'EBADCSRFTOKEN') return next(err)
+//   res.status(403)
+//   res.render('error', {message: 'Opps Invalid Token CSRF!', error: {status: 403}});
+// }); // error handle csrf
 
 /* ROUTER */
 app.use('/', indexRouter);
