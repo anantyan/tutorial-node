@@ -36,7 +36,8 @@ class Index {
     res.render('new', {csrfToken: req.csrfToken()});
   }
   static create(req, res) {
-    indexModel.post([req.body.itemName], (err, results) => {
+    indexModel.post([req.body.itemName], (err, connection, results) => {
+      connection.release();
       res.redirect('/index');
     });
   } // create
