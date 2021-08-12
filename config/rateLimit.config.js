@@ -12,7 +12,7 @@ const rateLimiter = rateLimit({
     client: redisClient,
     expiry: 60*15
   }),
-  max: 5,
+  max: 10000000000,
   handler: errorHandler
 });
 
