@@ -1,7 +1,7 @@
 # Tutorial Node
 ### Description
 * Configurasi nodejs &amp; expressjs minimal dengan security<br/>
-* Configurasi 1.1.1 version dengan NodeJS versi 14 LTS
+* Configurasi 2.0.0 version dengan NodeJS versi 14 LTS
 ### Config
 #### Third version
 * express-validator
