@@ -1,19 +1,32 @@
 const rateLimit = require('express-rate-limit');
-const RedisStore = require('rate-limit-redis');
+/* const RedisStore = require('rate-limit-redis');
 
-const redisClient = require('./redis.config');
+const redisClient = require('./redis.config'); */
 
-const errorHandler = (req, res) => {
-  res.status(429);
-  res.render('error', {message: "Terlalu melampui batas akses api! Tunggu 15 Menit", error: {status: 429}});
-}
-const rateLimiter = rateLimit({
-  store: new RedisStore({
+const rateLimitWrite = rateLimit({
+  /* store: new RedisStore({
     client: redisClient,
-    expiry: 60*15
-  }),
-  max: 10000000000,
-  handler: errorHandler
+    expiry: 60*15 // 15 detik
+  }), */
+  windowMs: 60*15*1000, // 15 menit
+  max: 200,
+  handler: (req, res) => {
+    res.status(429);
+    res.render('error', {message: "Karena server kami kecil jadi kami batasin 200x kunjungan tiap 15 menit deh :( Tunggu 15 Menit ya :)", error: {status: 429}});
+  }
 });
 
-module.exports = rateLimiter
+const rateLimitRead = rateLimit({
+  /* store: new RedisStore({
+    client: redisClient,
+    expiry: 60*15 // 15 detik
+  }), */
+  windowMs: 60*15*1000, // 15 menit
+  max: 500,
+  handler: (req, res) => {
+    res.status(429);
+    res.render('error', {message: "Karena server kami kecil jadi kami batasin 500x kunjungan tiap 15 menit deh :( Tunggu 15 Menit ya :)", error: {status: 429}});
+  }
+});
+
+module.exports = { rateLimitRead, rateLimitWrite }

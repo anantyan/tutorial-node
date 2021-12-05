@@ -18,7 +18,7 @@ class Index {
       conn.release();
       res.render('index', {csrfToken: req.csrfToken(), items: result});
     } catch(err) {
-      console.log(err);
+      new Error(err);
     }
   } // read
 
@@ -44,7 +44,7 @@ class Index {
       await indexModel.post([req.body.itemName]);
       res.redirect('/index');
     } catch(err) {
-      console.log(err);
+      new Error(err);
     }
   } // create
 
@@ -54,7 +54,7 @@ class Index {
       conn.release();
       res.render('edit', {csrfToken: req.csrfToken(), item: result[0]});
     } catch(err) {
-      console.log(err);
+      new Error(err);
     }
   }
 
@@ -74,7 +74,7 @@ class Index {
       await indexModel.put([req.body.itemName, req.file.filename, req.file.path, req.params.id]);
       res.redirect('/index');
     } catch(err) {
-      console.log(err);
+      new Error(err);
     } 
   } // update
 
@@ -94,7 +94,7 @@ class Index {
       await indexModel.delete([req.params.id]);
       res.redirect('/index');
     } catch(err) {
-      console.log(err);
+      new Error(err);
     }
   } // delete
 }

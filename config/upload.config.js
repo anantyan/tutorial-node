@@ -6,46 +6,44 @@ const storage = multer.diskStorage({
     cb(null, path.join(__dirname, '../public/upload'));
   },
   filename: (req, file, cb) => {
-    cb(null, `IMG${Date.now()+path.extname(file.originalname)}`);
+    cb(null, `IMG${Date.now()+path.extname(file.originalname)}`)
   }
-});
+})
 
 const filter = (req, file, cb) => {
-  const typeFile = /jpeg|jpg|png/;
+  const typeFile = /jpeg|jpg|png/
   const extname = typeFile.test(
     path.extname(file.originalname).toLowerCase()
-  );
-  const typeMime = typeFile.test(file.mimetype);
+  )
+  const typeMime = typeFile.test(file.mimetype)
   if(typeMime && extname) {
-    cb(null, true);
+    cb(null, true)
   } else {
-    cb({message: 'File tidak sesuai format!'});
+    cb({message: 'File tidak sesuai format!'})
   }
-};
+}
 
 const itemPicture = multer({
   storage: storage,
   limits: {
-    fileSize: 5242880
-  }, // satuan bytes (5mb)
+    fileSize: 5242880 // satuan bytes (5mb)
+  },
   fileFilter: filter
-}).single('itemPicture');
+}).single('itemPicture')
 
-class uploadConfig {
-  
-  static itemPicture(req, res, next) {
-    itemPicture(req, res, (err) => {
-      if(err instanceof multer.MulterError) {
-        res.status(200)
-        res.render('error', {message: err.message, error: {status: 200}});
-      } else if(err) {
-        res.status(200)
-        res.render('error', {message: err.message, error: {status: 200}});
-      } else if(req.file != undefined) {
-        next();
-      }
-    });
-  }
+
+const uploadConfig = (req, res, next) => {
+  itemPicture(req, res, (err) => {
+    if(err instanceof multer.MulterError) {
+      res.status(400)
+      res.render('error', {message: err.message, error: {status: 400}});
+    } else if(err) {
+      res.status(400)
+      res.render('error', {message: err.message, error: {status: 400}});
+    } else if(req.file != undefined) {
+      next();
+    }
+  });
 }
 
 module.exports = uploadConfig;

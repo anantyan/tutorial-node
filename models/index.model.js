@@ -12,7 +12,7 @@ class Index {
         });
       });
     } catch(err) {
-      console.log(err);
+      new Error(err);
     }
   }
 
@@ -26,7 +26,7 @@ class Index {
         });
       });
     } catch(err) {
-      console.log(err);
+      new Error(err);
     }
   }
 
@@ -40,7 +40,7 @@ class Index {
         });
       });
     } catch(err) {
-      console.log(err);
+      new Error(err);
     }
   }
 
@@ -54,7 +54,7 @@ class Index {
         });
       });
     } catch(err) {
-      console.log(err);
+      new Error(err);
     }
   }
   
@@ -68,7 +68,7 @@ class Index {
         });
       });
     } catch(err) {
-      console.log(err);
+      new Error(err);
     }
   }
 }

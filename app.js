@@ -13,6 +13,7 @@ const helmetConfig = require('./config/helmet.config')
 
 const app = express();
 
+/* CONFIGURE PROXY */
 app.set('trust proxy', 1);
 
 /* VIEW ENGINE SETUP */
@@ -24,10 +25,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use('/static', express.static(path.join(__dirname, 'public')));
-// app.use(httpsRedirect({
-//   subDomain: 'www',
-//   protocol: 'https'
-// }));
+
+/* HTTP TO HTTPS CONNECTION */
+/* app.use(httpsRedirect({
+  subDomain: 'www',
+  protocol: 'https'
+})); */
 
 /* HELMETJS */
 app.use(helmetConfig())
@@ -49,7 +52,7 @@ app.use((err, req, res, next) => {
   if (err.code !== 'EBADCSRFTOKEN') return next(err)
   res.status(403)
   res.render('error', {message: 'Opps Invalid Token CSRF!', error: {status: 403}});
-}); // error handle csrf
+});
 
 /* ROUTER */
 app.use('/', indexRouter);
@@ -61,11 +64,8 @@ app.use((req, res, next) => {
 
 /* ERROR HANDLER */
 app.use((err, req, res, next) => {
-  // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
   res.status(err.status || 500);
   res.render('error');
 });

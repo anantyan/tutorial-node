@@ -1,20 +1,15 @@
-const redis = require('redis');
-const fs = require('fs');
+/* const redis = require('redis');
+const path = require('path');
 
 const redisClient = redis.createClient({
-  host: '127.0.0.1',
-  port: 6379, // jika menggunakan path redis.sock lebih baik ganti ke path saja
-  ttl: 60*60*24 // in second to 24 hours
+  host: '127.0.0.1', // for localhost
+  port: 6379, // for localhost */
+  /* path: path.join(__dirname, '../../redis.sock'), */ // for global
+  /* ttl: 60*60*24 // in second to 24 hours
 }).on('connect', () => {
-  /* fs.appendFile('RedisConnect.txt', new Date()+' Redis isConnected!\n', (err) => {
-    if(err) throw err;
-    console.log('Success write!');
-  }); */
+  console.log('Success write!');
 }).on('error', (err) => {
-  /* fs.appendFile('RedisError.txt', new Date()+' '+err+'\n', (err) => {
-    if(err) throw err;
-    console.log('Error write!');
-  }); */
+  console.log('Error write!');
 });
 
-module.exports = redisClient
+module.exports = redisClient */
