@@ -1,8 +1,8 @@
 const fs = require('fs'); // access file system
 const path = require('path');
-const indexModel = require('../models/index.model');
+const IndexModel = require('../models/index.model');
 
-class Index {
+class IndexController {
 
   static home(req, res) {
     if(req.session.logged) {
@@ -14,7 +14,7 @@ class Index {
   
   static async index(req, res) {
     try {
-      const [conn, result] = await indexModel.get();
+      const [conn, result] = await IndexModel.get()
       conn.release();
       res.render('index', {csrfToken: req.csrfToken(), items: result});
     } catch(err) {
@@ -41,7 +41,7 @@ class Index {
   
   static async create(req, res) {
     try {
-      await indexModel.post([req.body.itemName]);
+      await IndexModel.post([req.body.itemName]);
       res.redirect('/index');
     } catch(err) {
       new Error(err);
@@ -50,7 +50,7 @@ class Index {
 
   static async edit(req, res) {
     try {
-      const [conn, result] = await indexModel.getId([req.params.id]);
+      const [conn, result] = await IndexModel.getId([req.params.id]);
       conn.release();
       res.render('edit', {csrfToken: req.csrfToken(), item: result[0]});
     } catch(err) {
@@ -68,10 +68,10 @@ class Index {
       });
     }
     try {
-      const [conn, result] = await indexModel.getId([req.params.id]);
+      const [conn, result] = await IndexModel.getId([req.params.id]);
       conn.release();
       await unlink(`../public/upload/${result[0].picture}`);
-      await indexModel.put([req.body.itemName, req.file.filename, req.file.path, req.params.id]);
+      await IndexModel.put([req.body.itemName, req.file.filename, req.file.path, req.params.id]);
       res.redirect('/index');
     } catch(err) {
       new Error(err);
@@ -88,10 +88,10 @@ class Index {
       });
     }
     try {
-      const [conn, result] = await indexModel.getId([req.params.id]);
+      const [conn, result] = await IndexModel.getId([req.params.id]);
       conn.release();
       await unlink(`../public/upload/${result[0].picture}`);
-      await indexModel.delete([req.params.id]);
+      await IndexModel.delete([req.params.id]);
       res.redirect('/index');
     } catch(err) {
       new Error(err);
@@ -99,4 +99,4 @@ class Index {
   } // delete
 }
 
-module.exports = Index;
+module.exports = IndexController;

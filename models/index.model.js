@@ -1,6 +1,6 @@
 const dbConfig = require('../config/db.config');
 
-class Index {
+class IndexModel {
 
   static async get() {
     try {
@@ -73,4 +73,4 @@ class Index {
   }
 }
 
-module.exports = Index;
+module.exports = IndexModel;

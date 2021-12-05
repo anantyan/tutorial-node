@@ -1,4 +1,5 @@
 const { validationResult, check } = require('express-validator')
+const IndexModel = require('../models/index.model')
 
 /* CHECK VALIDATION /CREATE POST */
 const validationCreate = [
@@ -17,7 +18,7 @@ const validationCobaPost = [
     .isLength({min: 6})
     .withMessage('Tidak boleh kurang dari 6!')
     .custom((val, {req, location, path}) => {
-      if(val !== req.body.password) {
+      if(val !== req.query.password) {
         return Promise.reject('Password tidak sama!')
       }
       return true
@@ -30,14 +31,14 @@ const validationEdit = [
       .isInt().toInt()
       .withMessage('ID harus angka!')
       .custom(async (val, {req, location, path}) => {
-        const [conn, result] = await indexModel.getId([req.params.id])
+        const [conn, result] = await IndexModel.getId([req.params.id])
         conn.release()
         if(val !== result[0].id) return Promise.reject(`Tidak ditemukan!`)
       })
       .trim().escape()
 ]
 
-const validator = (req, res, next) => {
+const IndexValidation = (req, res, next) => {
   const error = validationResult(req)
   if(!error.isEmpty()) {
     return res.status(400).json({message: error.array({onlyFirstError: true})})
@@ -45,4 +46,4 @@ const validator = (req, res, next) => {
   next()
 }
 
-module.exports = { validator, validationCreate, validationCobaPost, validationEdit }
+module.exports = { IndexValidation, validationCreate, validationCobaPost, validationEdit }
